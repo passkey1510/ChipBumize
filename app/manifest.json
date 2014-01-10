@@ -1,8 +1,8 @@
 {
-    "name": "__MSG_appName__",
-    "version": "0.0.3",
+    "name": "SmartVideo For YouTube™",
+    "version": "0.4",
     "manifest_version": 2,
-    "description": "__MSG_appDescription__",
+    "description": "__MSG_extension_description__",
     "icons": {
         "16": "images/icon-16.png",
         "128": "images/icon-128.png"
@@ -10,12 +10,37 @@
     "default_locale": "en",
     "background": {
         "scripts": [
-            "scripts/background.js"
-        ]
+            "scripts/setup.js",
+            "scripts/port.js",
+            "scripts/upgrade.js",
+            "scripts/updates.js",
+            "scripts/tabBundleKeys.js",
+            "scripts/background.js",
+            "scripts/main.js"
+        ],
+        "persistent": true
     },
+    "content_scripts": [
+        {
+            "all_frames": true,
+            "js": [
+                "includes/port.js",
+                "scripts/tab.js"
+            ],
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "run_at": "document_start"
+        }
+    ],
+    "minimum_chrome_version": "20",
     "permissions": [
-        "tabs",
-        "http://*/*",
-        "https://*/*"
+        "tabs"
+    ],
+    "web_accessible_resources": [
+        "scripts/mutationObserver.js",
+        "scripts/mytube.js",
+        "styles/main.css"
     ]
 }
